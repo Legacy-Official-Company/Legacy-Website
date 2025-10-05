@@ -230,21 +230,27 @@ export default function ProductDetailPage() {
                   </p>
                 </div>
 
-                {/* Buy Button */}
-                {product.buyUrl && (
-                  <div className="pt-6">
-                    <Button
-                      onClick={handleBuyNow}
-                      className="w-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 border-0 text-base font-medium tracking-widest uppercase px-8 py-8 transition-all duration-300 hover:scale-105"
-                    >
-                      BUY NOW
-                      <ExternalLink className="ml-3 w-5 h-5" />
-                    </Button>
+                {/* Buy Button - Always Visible */}
+                <div className="pt-6">
+                  <Button
+                    onClick={handleBuyNow}
+                    disabled={!product.buyUrl}
+                    className="w-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed border-0 text-base font-medium tracking-widest uppercase px-8 py-8 transition-all duration-300 hover:scale-105"
+                  >
+                    {product.buyUrl ? 'BUY NOW' : 'COMING SOON'}
+                    {product.buyUrl && <ExternalLink className="ml-3 w-5 h-5" />}
+                  </Button>
+                  {product.buyUrl && (
                     <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-4">
                       You will be redirected to complete your purchase
                     </p>
-                  </div>
-                )}
+                  )}
+                  {!product.buyUrl && (
+                    <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-4">
+                      Purchase link not yet available
+                    </p>
+                  )}
+                </div>
 
                 {/* Features */}
                 <div className="grid grid-cols-2 gap-6 pt-8 border-t border-gray-200 dark:border-gray-700">

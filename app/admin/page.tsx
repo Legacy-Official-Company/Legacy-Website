@@ -305,16 +305,23 @@ export default function AdminPage() {
         <Navigation isPageLoaded={isPageLoaded} currentPage="admin" />
       
       {/* Admin Header */}
-      <div className="px-8 py-4 border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-black">
+      <div className="px-8 py-8 border-b-2 border-black dark:border-white bg-gray-50 dark:bg-black">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <span className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">ADMIN PANEL</span>
-          <Button
-            onClick={handleAddProduct}
-            className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 border-0 text-xs font-medium tracking-widest uppercase px-6 py-2 transition-all duration-300 hover:scale-105"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            ADD PRODUCT
-          </Button>
+          <div>
+            <h1 className="text-3xl font-bold tracking-widest uppercase mb-2">ADMIN PANEL</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400 tracking-wider">
+              Manage your products, content, and settings
+            </p>
+          </div>
+          {activeTab === "products" && (
+            <Button
+              onClick={handleAddProduct}
+              className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 border-0 text-sm font-medium tracking-widest uppercase px-6 py-3 transition-all duration-300 hover:scale-105"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              ADD PRODUCT
+            </Button>
+          )}
         </div>
       </div>
 
@@ -370,21 +377,6 @@ export default function AdminPage() {
             </button>
           </div>
 
-          {/* Add Product Button */}
-          <div
-            className={`mb-8 transition-all duration-700 ${
-              isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-            }`}
-            style={{ transitionDelay: "400ms" }}
-          >
-            <Button
-              onClick={() => setShowForm(true)}
-              className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 border-0 text-sm font-medium tracking-widest uppercase px-6 py-3 transition-all duration-300"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              ADD PRODUCT
-            </Button>
-          </div>
 
           {/* Product Form Modal */}
           {showForm && (
