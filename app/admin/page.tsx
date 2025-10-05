@@ -589,14 +589,11 @@ export default function AdminPage() {
                   <p className="text-sm font-mono tracking-widest uppercase text-gray-500">LOADING PRODUCTS...</p>
                 </div>
               ) : (
-                <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 transition-all duration-700 ${
-                  isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-                }`}
-                style={{ transitionDelay: "500ms" }}>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {products.map((product, index) => (
                     <div
                       key={product.id}
-                      className={`group cursor-pointer transition-all duration-700 ${
+                      className={`bg-white dark:bg-black border-2 border-black dark:border-white overflow-hidden hover:shadow-2xl transition-all duration-700 group ${
                         isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                       }`}
                       style={{ transitionDelay: `${600 + index * 100}ms` }}
@@ -611,30 +608,29 @@ export default function AdminPage() {
                           <Button
                             size="sm"
                             onClick={() => handleEditProduct(product)}
-                            className="bg-white text-black hover:bg-gray-100 border-0 p-2 h-8 w-8"
+                            className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 border-0 p-2 h-8 w-8"
                           >
                             <Edit className="w-4 h-4" />
                           </Button>
                           <Button
                             size="sm"
                             onClick={() => handleDeleteProduct(product.id)}
-                            className="bg-red-500 text-white hover:bg-red-600 border-0 p-2 h-8 w-8"
+                            className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 border-0 p-2 h-8 w-8"
                           >
                             <Trash2 className="w-4 h-4" />
                           </Button>
                         </div>
                       </div>
 
-                      <div className="space-y-3">
+                      <div className="p-4 space-y-3">
                         <div>
-                          <h3 className="text-sm font-medium tracking-wide">{product.name}</h3>
-                          <p className="text-xs text-gray-500 uppercase tracking-widest font-mono">{product.category}</p>
+                          <h3 className="text-sm font-bold tracking-wider uppercase">{product.name}</h3>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-widest font-mono mt-1">{product.category}</p>
                         </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium tracking-wide">{product.price}</span>
-                          <span className="text-xs text-gray-400 font-mono">ID: {product.id}</span>
+                        <div className="flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
+                          <span className="text-lg font-bold tracking-wide">{product.price}</span>
                         </div>
-                        <p className="text-xs text-gray-600 line-clamp-2">{product.description}</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed">{product.description}</p>
                       </div>
                     </div>
                   ))}
@@ -643,17 +639,17 @@ export default function AdminPage() {
 
               {!loading && products.length === 0 && (
                 <div
-                  className={`text-center py-16 transition-all duration-700 ${
+                  className={`text-center py-16 border-2 border-dashed border-gray-300 dark:border-gray-700 transition-all duration-700 ${
                     isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                   }`}
                   style={{ transitionDelay: "600ms" }}
                 >
-                  <p className="text-gray-500 text-sm font-mono tracking-widest uppercase mb-4">
+                  <p className="text-gray-500 dark:text-gray-400 text-sm font-mono tracking-widest uppercase mb-6">
                     NO PRODUCTS FOUND
                   </p>
                   <Button
                     onClick={handleAddProduct}
-                    className="bg-black text-white hover:bg-gray-800 border-0 text-xs font-medium tracking-widest uppercase px-6 py-2"
+                    className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 border-0 text-sm font-medium tracking-widest uppercase px-8 py-3 transition-all duration-300 hover:scale-105"
                   >
                     <Plus className="w-4 h-4 mr-2" />
                     ADD FIRST PRODUCT

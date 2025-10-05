@@ -117,18 +117,18 @@ export default function AboutPage() {
       <Navigation isPageLoaded={isPageLoaded} currentPage="about" />
 
       {/* Hero Section */}
-      <section className="px-8 py-20 border-b-2 border-black dark:border-white">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-8 py-16 border-b-2 border-black dark:border-white">
+        <div className="max-w-5xl mx-auto">
           <div
             className={`text-center transition-all duration-700 ${
               isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            <h1 className="text-5xl md:text-7xl font-bold tracking-widest uppercase mb-8">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-widest uppercase mb-6">
               {aboutContent.heroTitle}
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
               {aboutContent.heroDescription}
             </p>
           </div>
@@ -136,69 +136,48 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story Section */}
-      <section className="px-8 py-20">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-8 py-12">
+        <div className="max-w-4xl mx-auto">
           <div
-            className={`grid lg:grid-cols-2 gap-12 items-center transition-all duration-700 ${
+            className={`border-2 border-black dark:border-white p-8 md:p-10 bg-gray-50 dark:bg-black transition-all duration-700 hover:shadow-2xl ${
               isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
             }`}
             style={{ transitionDelay: "400ms" }}
           >
-            <div className="border-2 border-black dark:border-white p-12 bg-gray-50 dark:bg-black">
-              <h2 className="text-3xl font-bold tracking-widest uppercase mb-2">
-                {aboutContent.storyTitle}
-              </h2>
-              <div className="w-16 h-1 bg-black dark:bg-white mb-8"></div>
-              <div className="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed">
-                {aboutContent.storyContent && aboutContent.storyContent.length > 0 ? (
-                  aboutContent.storyContent.map((paragraph: string, index: number) => (
-                    <p key={index} className="text-base">
-                      {paragraph}
-                    </p>
-                  ))
-                ) : (
-                  <p>Loading story content...</p>
-                )}
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div className="border-2 border-black dark:border-white p-8 text-center bg-white dark:bg-black">
-                <div className="text-4xl font-bold mb-2">15+</div>
-                <div className="text-sm tracking-wider text-gray-600 dark:text-gray-400">YEARS</div>
-              </div>
-              <div className="border-2 border-black dark:border-white p-8 text-center bg-white dark:bg-black">
-                <div className="text-4xl font-bold mb-2">1M+</div>
-                <div className="text-sm tracking-wider text-gray-600 dark:text-gray-400">CUSTOMERS</div>
-              </div>
-              <div className="border-2 border-black dark:border-white p-8 text-center bg-white dark:bg-black">
-                <div className="text-4xl font-bold mb-2">50+</div>
-                <div className="text-sm tracking-wider text-gray-600 dark:text-gray-400">COUNTRIES</div>
-              </div>
-              <div className="border-2 border-black dark:border-white p-8 text-center bg-white dark:bg-black">
-                <div className="text-4xl font-bold mb-2">10K+</div>
-                <div className="text-sm tracking-wider text-gray-600 dark:text-gray-400">PRODUCTS</div>
-              </div>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-widest uppercase mb-2">
+              {aboutContent.storyTitle}
+            </h2>
+            <div className="w-16 h-1 bg-black dark:bg-white mb-6"></div>
+            <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed text-sm md:text-base">
+              {aboutContent.storyContent && aboutContent.storyContent.length > 0 ? (
+                aboutContent.storyContent.map((paragraph: string, index: number) => (
+                  <p key={index}>
+                    {paragraph}
+                  </p>
+                ))
+              ) : (
+                <p>Loading story content...</p>
+              )}
             </div>
           </div>
         </div>
       </section>
 
       {/* Mission Section */}
-      <section className="px-8 py-20 bg-gray-50 dark:bg-black border-y-2 border-black dark:border-white">
-        <div className="max-w-5xl mx-auto">
+      <section className="px-8 py-12 bg-gray-50 dark:bg-black border-y-2 border-black dark:border-white">
+        <div className="max-w-4xl mx-auto">
           <div
-            className={`text-center transition-all duration-700 ${
+            className={`text-center transition-all duration-700 hover:scale-105 ${
               isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
             }`}
             style={{ transitionDelay: "600ms" }}
           >
-            <div className="border-2 border-black dark:border-white p-12 bg-white dark:bg-black">
-              <h2 className="text-3xl font-bold tracking-widest uppercase mb-6">
+            <div className="border-2 border-black dark:border-white p-8 md:p-10 bg-white dark:bg-black">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-widest uppercase mb-4">
                 {aboutContent.missionTitle}
               </h2>
-              <div className="w-16 h-1 bg-black dark:bg-white mx-auto mb-8"></div>
-              <p className="text-lg text-gray-700 dark:text-white leading-relaxed">
+              <div className="w-16 h-1 bg-black dark:bg-white mx-auto mb-6"></div>
+              <p className="text-sm md:text-base text-gray-700 dark:text-white leading-relaxed">
                 {aboutContent.missionContent}
               </p>
             </div>
@@ -207,43 +186,45 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="px-8 py-20">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-8 py-12">
+        <div className="max-w-5xl mx-auto">
           <div
-            className={`text-center mb-16 transition-all duration-700 ${
+            className={`text-center mb-10 transition-all duration-700 ${
               isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
             }`}
             style={{ transitionDelay: "800ms" }}
           >
-            <h2 className="text-4xl font-bold tracking-widest uppercase mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-widest uppercase mb-3">
               OUR VALUES
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
               The principles that guide everything we do
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {aboutContent.values && aboutContent.values.length > 0 ? aboutContent.values.map((value: any, index: number) => (
               <div
                 key={value.title}
-                className={`border-2 border-black dark:border-white p-8 bg-white dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900 transition-all duration-300 group cursor-pointer ${
+                className={`border-2 border-black dark:border-white p-6 bg-white dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900 transition-all duration-500 group cursor-pointer hover:scale-105 hover:shadow-2xl ${
                   isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                 }`}
-                style={{ transitionDelay: `${1000 + index * 100}ms` }}
+                style={{ transitionDelay: `${900 + index * 100}ms` }}
               >
-                <div className="flex justify-center mb-6 text-black dark:text-white group-hover:scale-110 transition-transform duration-300">
-                  {getValueIcon(value.title)}
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="text-black dark:text-white group-hover:scale-110 transition-transform duration-300">
+                    {getValueIcon(value.title)}
+                  </div>
+                  <h3 className="text-lg font-bold tracking-widest uppercase">
+                    {value.title}
+                  </h3>
                 </div>
-                <h3 className="text-lg font-bold tracking-widest uppercase mb-4 text-center">
-                  {value.title}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed text-center">
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                   {value.description}
                 </p>
               </div>
             )) : (
-              <div className="col-span-4 text-center py-8">
+              <div className="col-span-2 text-center py-8">
                 <p className="text-gray-500 dark:text-gray-400">Loading values...</p>
               </div>
             )}
@@ -253,33 +234,33 @@ export default function AboutPage() {
 
       {/* Company Rules Section */}
       {companyRules.length > 0 && (
-        <section className="px-8 py-20 bg-gray-50 dark:bg-black border-t-2 border-black dark:border-white">
+        <section className="px-8 py-12 bg-gray-50 dark:bg-black border-t-2 border-black dark:border-white">
           <div className="max-w-5xl mx-auto">
             <div
-              className={`mb-12 text-center transition-all duration-700 ${
+              className={`mb-8 text-center transition-all duration-700 ${
                 isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
               }`}
-              style={{ transitionDelay: "1400ms" }}
+              style={{ transitionDelay: "1200ms" }}
             >
-              <h2 className="text-4xl font-bold tracking-widest uppercase mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-widest uppercase mb-3">
                 COMPANY RULES
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
-                Our commitment to excellence and integrity
+              <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                Our commitment to excellence
               </p>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-4">
               {companyRules.map((rule, index) => (
                 <div
                   key={index}
-                  className={`border-2 border-black dark:border-white p-6 bg-white dark:bg-black transition-all duration-700 hover:shadow-lg ${
+                  className={`border-2 border-black dark:border-white p-5 bg-white dark:bg-black transition-all duration-700 hover:shadow-lg hover:scale-102 ${
                     isPageLoaded ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
                   }`}
-                  style={{ transitionDelay: `${1500 + index * 100}ms` }}
+                  style={{ transitionDelay: `${1300 + index * 80}ms` }}
                 >
                   <div className="flex items-start gap-4">
-                    <span className="text-3xl font-bold text-gray-300 dark:text-gray-700">
+                    <span className="text-2xl font-bold text-gray-300 dark:text-gray-700 min-w-[2rem]">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <p className="text-sm text-gray-700 dark:text-white leading-relaxed pt-1">
