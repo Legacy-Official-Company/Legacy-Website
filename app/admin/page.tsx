@@ -21,6 +21,7 @@ interface Product {
   discountPercentage?: number
   category: string
   image: string
+  images?: string[]
   description: string
   buyUrl?: string
 }
@@ -61,6 +62,7 @@ export default function AdminPage() {
     discountPercentage: "",
     category: "",
     image: "",
+    images: [""],
     description: "",
     buyUrl: ""
   })
@@ -156,8 +158,11 @@ export default function AdminPage() {
     setFormData({
       name: "",
       price: "",
+      originalPrice: "",
+      discountPercentage: "",
       category: "",
       image: "",
+      images: [""],
       description: "",
       buyUrl: ""
     })
@@ -174,6 +179,7 @@ export default function AdminPage() {
       discountPercentage: product.discountPercentage?.toString() || "",
       category: product.category,
       image: product.image,
+      images: product.images && product.images.length > 0 ? product.images : [product.image || ""],
       description: product.description,
       buyUrl: product.buyUrl || ""
     })
@@ -223,9 +229,31 @@ export default function AdminPage() {
       discountPercentage: "",
       category: "",
       image: "",
+      images: [""],
       description: "",
       buyUrl: ""
     })
+  }
+
+  const handleAddImageUrl = () => {
+    setFormData(prev => ({
+      ...prev,
+      images: [...(prev.images || []), ""]
+    }))
+  }
+
+  const handleRemoveImageUrl = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      images: prev.images?.filter((_, i) => i !== index) || [""]
+    }))
+  }
+
+  const handleImageUrlChange = (index: number, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      images: prev.images?.map((img, i) => i === index ? value : img) || [""]
+    }))
   }
 
   const handleSaveAboutContent = async () => {
@@ -451,7 +479,7 @@ export default function AdminPage() {
 
                   <div>
                     <label className="block text-sm font-medium tracking-widest uppercase mb-2 text-black dark:text-white">
-                      IMAGE URL
+                      MAIN IMAGE URL
                     </label>
                     <Input
                       name="image"
@@ -460,6 +488,52 @@ export default function AdminPage() {
                       placeholder="https://example.com/image.jpg"
                       className="border-gray-300 dark:border-gray-600 focus:border-black dark:focus:border-white bg-white dark:bg-white text-black dark:text-black"
                     />
+                    <p className="text-xs text-gray-500 mt-1">
+                      This will be the primary product image
+                    </p>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="block text-sm font-medium tracking-widest uppercase text-black dark:text-white">
+                        ADDITIONAL IMAGES (OPTIONAL)
+                      </label>
+                      <Button
+                        type="button"
+                        onClick={handleAddImageUrl}
+                        size="sm"
+                        className="bg-black text-white hover:bg-gray-800 text-xs"
+                      >
+                        <Plus className="w-3 h-3 mr-1" />
+                        ADD IMAGE
+                      </Button>
+                    </div>
+                    <div className="space-y-3">
+                      {formData.images?.map((imageUrl, index) => (
+                        <div key={index} className="flex gap-2">
+                          <Input
+                            value={imageUrl}
+                            onChange={(e) => handleImageUrlChange(index, e.target.value)}
+                            placeholder={`Image URL ${index + 1}`}
+                            className="border-gray-300 dark:border-gray-600 focus:border-black dark:focus:border-white bg-white dark:bg-white text-black dark:text-black flex-1"
+                          />
+                          {formData.images && formData.images.length > 1 && (
+                            <Button
+                              type="button"
+                              onClick={() => handleRemoveImageUrl(index)}
+                              size="sm"
+                              variant="outline"
+                              className="border-red-300 text-red-600 hover:bg-red-50"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">
+                      Add multiple images for product gallery. First image will be used if main image is empty.
+                    </p>
                   </div>
 
                   <div>
