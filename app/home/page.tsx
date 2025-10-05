@@ -211,7 +211,7 @@ export default function HomePage() {
               }`}
               style={{ transitionDelay: "500ms" }}
             >
-              <div className="bg-gray-50 dark:bg-gray-900 p-8 border-2 border-black dark:border-white relative overflow-hidden">
+              <div className="bg-gray-50 dark:bg-black p-8 border-2 border-black dark:border-white relative overflow-hidden">
                 {/* Progress Indicators */}
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-sm font-medium tracking-widest uppercase">

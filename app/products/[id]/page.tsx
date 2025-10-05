@@ -200,7 +200,7 @@ export default function ProductDetailPage() {
                   {product.originalPrice && product.discountPercentage ? (
                     <div className="space-y-3">
                       <div className="flex items-center gap-4">
-                        <span className="text-5xl font-bold text-red-600 dark:text-red-500">
+                        <span className="text-5xl font-bold text-black dark:text-white">
                           {product.price}
                         </span>
                         <span className="text-2xl text-gray-400 line-through">
@@ -208,7 +208,7 @@ export default function ProductDetailPage() {
                         </span>
                       </div>
                       <div className="inline-block">
-                        <span className="bg-red-600 text-white px-4 py-2 text-sm font-bold tracking-wider">
+                        <span className="bg-black dark:bg-white text-white dark:text-black px-4 py-2 text-sm font-bold tracking-wider">
                           SAVE {product.discountPercentage}% - LIMITED TIME OFFER
                         </span>
                       </div>

@@ -193,13 +193,13 @@ export default function AboutPage() {
 
           {/* Mission Section */}
           <div
-            className={`bg-gray-50 dark:bg-black p-12 text-center mb-20 transition-all duration-700 ${
+            className={`bg-gray-50 dark:bg-black border-2 border-black dark:border-white p-12 text-center mb-20 transition-all duration-700 ${
               isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
             }`}
             style={{ transitionDelay: "1100ms" }}
           >
             <h2 className="text-2xl font-medium tracking-widest uppercase mb-6">{aboutContent.missionTitle}</h2>
-            <p className="text-lg text-gray-700 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-700 dark:text-white max-w-4xl mx-auto leading-relaxed">
               {aboutContent.missionContent}
             </p>
           </div>

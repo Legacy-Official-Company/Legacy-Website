@@ -104,7 +104,7 @@ export default function ProductsPage() {
 
       {/* Featured Hero Section */}
       {featuredProduct && (
-        <section className="px-8 py-16 bg-gray-50 dark:bg-gray-900 border-b-2 border-black dark:border-white">
+        <section className="px-8 py-16 bg-gray-50 dark:bg-black border-b-2 border-black dark:border-white">
           <div className="max-w-7xl mx-auto">
             <div
               className={`transition-all duration-700 mb-8 ${
@@ -127,7 +127,7 @@ export default function ProductsPage() {
                           setIsTransitioning(false)
                         }, 500)
                       }}
-                      className={`h-2 transition-all duration-300 cursor-pointer hover:bg-gray-500 ${
+                      className={`h-2 transition-all duration-300 cursor-pointer hover:bg-gray-500 dark:hover:bg-gray-400 ${
                         index === currentFeaturedIndex
                           ? "bg-black dark:bg-white w-8"
                           : "bg-gray-300 dark:bg-gray-600 w-2"
@@ -176,14 +176,14 @@ export default function ProductsPage() {
                   {featuredProduct.originalPrice && featuredProduct.discountPercentage ? (
                     <div className="space-y-2">
                       <div className="flex items-center gap-4">
-                        <span className="text-4xl font-bold text-red-600 dark:text-red-500">
+                        <span className="text-4xl font-bold text-black dark:text-white">
                           {featuredProduct.price}
                         </span>
                         <span className="text-2xl text-gray-400 line-through">
                           {featuredProduct.originalPrice}
                         </span>
                       </div>
-                      <span className="inline-block bg-red-600 text-white px-4 py-2 text-sm font-bold tracking-wider">
+                      <span className="inline-block bg-black dark:bg-white text-white dark:text-black px-4 py-2 text-sm font-bold tracking-wider">
                         SAVE {featuredProduct.discountPercentage}%
                       </span>
                     </div>
@@ -239,14 +239,14 @@ export default function ProductsPage() {
             </h2>
 
             {/* Search Bar */}
-            <div className="flex items-center bg-gray-50 dark:bg-gray-900 px-4 py-4 border-2 border-black dark:border-white mb-6">
+            <div className="flex items-center bg-gray-50 dark:bg-black px-4 py-4 border-2 border-black dark:border-white mb-6">
               <Search className="w-5 h-5 text-gray-400 dark:text-white mr-3" />
               <input
                 type="text"
                 placeholder="SEARCH PRODUCTS..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-transparent text-sm outline-none placeholder-gray-400 dark:placeholder-white w-full font-mono tracking-wider text-black dark:text-white"
+                className="bg-transparent text-sm outline-none placeholder-gray-400 dark:placeholder-gray-400 w-full font-mono tracking-wider text-black dark:text-white"
               />
             </div>
 
@@ -259,7 +259,7 @@ export default function ProductsPage() {
                   className={`border-2 text-xs font-medium tracking-widest uppercase bg-transparent px-6 py-3 transition-all duration-300 hover:scale-105 ${
                     selectedCategory === category
                       ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
-                      : "border-gray-300 dark:border-gray-600 text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+                      : "border-gray-300 dark:border-gray-600 text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                   }`}
                   onClick={() => handleCategoryFilter(category)}
                 >
@@ -269,7 +269,7 @@ export default function ProductsPage() {
             </div>
           </div>
 
-          {/* Products List */}
+          {/* Products Grid */}
           {loading ? (
             <div className="text-center py-16">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white mx-auto mb-4"></div>
@@ -278,33 +278,38 @@ export default function ProductsPage() {
               </p>
             </div>
           ) : (
-            <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProducts.map((product, index) => (
                 <div
                   key={product.id}
-                  className={`group cursor-pointer transition-all duration-700 border-b border-gray-200 dark:border-gray-800 pb-8 ${
+                  className={`group cursor-pointer transition-all duration-700 ${
                     isPageLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                   }`}
                   style={{ transitionDelay: `${400 + index * 100}ms` }}
                   onClick={() => window.location.href = `/products/${product.id}`}
                 >
-                  <div className="grid md:grid-cols-3 gap-8 items-center">
+                  <div className="border-2 border-black dark:border-white overflow-hidden bg-white dark:bg-black">
                     {/* Product Image */}
-                    <div className="overflow-hidden bg-gray-50 dark:bg-gray-900">
+                    <div className="relative overflow-hidden bg-gray-50 dark:bg-black">
                       <ImageWithLoading
                         src={product.image || "/placeholder.svg"}
                         alt={product.name}
-                        className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
+                      {product.discountPercentage && (
+                        <div className="absolute top-4 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-1 text-xs font-bold tracking-wider">
+                          -{product.discountPercentage}%
+                        </div>
+                      )}
                     </div>
 
                     {/* Product Info */}
-                    <div className="md:col-span-2 space-y-4">
+                    <div className="p-6 space-y-4">
                       <div>
                         <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-widest font-mono mb-2">
                           {product.category}
                         </p>
-                        <h3 className="text-2xl md:text-3xl font-bold tracking-wide mb-3">
+                        <h3 className="text-xl font-bold tracking-wide mb-2 line-clamp-2">
                           {product.name}
                         </h3>
                         <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed">
@@ -312,36 +317,31 @@ export default function ProductsPage() {
                         </p>
                       </div>
 
-                      <div className="flex items-center justify-between pt-4">
+                      <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                         <div>
                           {product.originalPrice && product.discountPercentage ? (
-                            <div className="space-y-1">
-                              <div className="flex items-center gap-3">
-                                <span className="text-3xl font-bold text-red-600 dark:text-red-500">
-                                  {product.price}
-                                </span>
-                                <span className="text-lg text-gray-400 line-through">
-                                  {product.originalPrice}
-                                </span>
-                              </div>
-                              <span className="inline-block text-xs bg-red-600 text-white px-3 py-1 font-bold tracking-wider">
-                                SAVE {product.discountPercentage}%
+                            <div className="flex items-center gap-3">
+                              <span className="text-2xl font-bold text-black dark:text-white">
+                                {product.price}
+                              </span>
+                              <span className="text-lg text-gray-400 line-through">
+                                {product.originalPrice}
                               </span>
                             </div>
                           ) : (
-                            <span className="text-3xl font-bold">
+                            <span className="text-2xl font-bold">
                               {product.price}
                             </span>
                           )}
                         </div>
 
-                        <div className="flex gap-3">
+                        <div className="flex gap-2">
                           <Button
                             onClick={(e) => {
                               e.stopPropagation()
                               window.location.href = `/products/${product.id}`
                             }}
-                            className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 border-0 text-sm font-medium tracking-widest uppercase px-6 py-4 transition-all duration-300 hover:scale-105"
+                            className="flex-1 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 border-0 text-xs font-medium tracking-widest uppercase py-4 transition-all duration-300 hover:scale-105"
                           >
                             VIEW
                           </Button>
@@ -357,7 +357,7 @@ export default function ProductsPage() {
                                 window.open(product.buyUrl, '_blank', 'noopener,noreferrer')
                               }}
                               variant="outline"
-                              className="border-2 border-black dark:border-white text-black dark:text-white hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black text-sm font-medium tracking-widest uppercase px-6 py-4 transition-all duration-300 hover:scale-105"
+                              className="flex-1 border-2 border-black dark:border-white text-black dark:text-white hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black text-xs font-medium tracking-widest uppercase py-4 transition-all duration-300 hover:scale-105"
                             >
                               BUY
                             </Button>
